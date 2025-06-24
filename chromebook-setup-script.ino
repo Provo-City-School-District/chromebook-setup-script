@@ -3,10 +3,10 @@
 Tested on chromeOS v137
 */
 
-#define SSID_NAME ""
-#define NETWORK_PASSWORD ""
-#define USERNAME ""
-#define PASSWORD ""
+#define SSID_NAME "Provisioning"
+#define NETWORK_PASSWORD "038s3tup"
+#define USERNAME "chromeenroll@provo.edu"
+#define PASSWORD "snug-snack-newish"
 
 #define RXLED 17
 
@@ -38,6 +38,8 @@ void write_enter()
 
 void setup()
 {
+    delay(3000);
+    Keyboard.begin();
 
     light_led();
     delay(4000);
@@ -150,12 +152,12 @@ void setup()
 
 
     // wait for enrollment to finish
-    delay(80000);
+    delay(60000);
 
 
     // Prepare to log in
     write_space();
-    delay(40000);
+    delay(30000);
 
     // LOGIN
 
@@ -181,34 +183,12 @@ void setup()
     delay(20000);
 
     // should be logged in
-
-    Keyboard.press(KEY_LEFT_CTRL);
-    Keyboard.press('t');
-    delay(100);
-    Keyboard.releaseAll();
-    delay(4000); // Wait for tab to open
-
-    // Skip ad privacy bs in Chrome Tab
-    write_tab();
-    delay(200);
-    write_tab();
-    delay(200);
-    write_tab();
-    delay(200);
-
-    write_space();
-    delay(400);
-
-
-    // Open update screen
-    Keyboard.print("chrome://os-settings/help");
-    delay(50);
+    Keyboard.write(KEY_LEFT_GUI);
+    delay(1000);
+    Keyboard.print("update");
+    delay(1000);
     write_enter();
-    delay(4000);
-
-    write_tab();
-    delay(500);
-
+    delay(5000);
 
     // start updates
     write_space();
